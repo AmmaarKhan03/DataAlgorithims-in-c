@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -135,12 +134,83 @@ bool equals(List A, List B) {
     }
 
     return true; 
-
-
-    
-
 }
 
 
+void clear (List L ) {
+
+    if (L == NULL) {
+        fprintf(stdout, "List error: clear(): NULL list refreence\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Node n = L->front;
+    while (n != NULL) {
+        Node temp = n; 
+        n = n->next; 
+        freeNode(&temp);
+    }
+    L->front = L->back = L->cursor = NULL; 
+    L->length = 0; 
+    L->index = -1;
+
+}
+
+void set (List L, ListElement x) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: set(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (length(L) == 0) {
+        fprintf(stdout, "List error: set(): empty List\n");
+        exit(EXIT_FAILURE);
+    }
+    if (length(L) < 0) {
+        fprintf(stdout, "List error: set(): no cursor\n");
+        exit(EXIT_FAILURE);
+    }
+
+    L ->cursor -> data = x;
+}
+
+void moveFront(List L) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: movefront(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->length > 0) {
+        L->cursor = L->front;
+        L->index = 0;
+    }
+}
+
+void moveBack(List L) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: movefront(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->length > 0) {
+        L->cursor = L->back;
+        L->index = L->length - 1;
+    }
+}
 
 
+void movePrev(List L) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: movefront(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->cursor != NULL) {
+        if (L->cursor == L->front) {
+            L->cursor = NULL;
+            L->index = -1;
+        } else {
+            L-> cursor = L->cursor ->prev;
+            L->index--;
+        }
+    }
+
+
+}
