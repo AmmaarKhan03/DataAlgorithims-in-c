@@ -199,7 +199,7 @@ void moveBack(List L) {
 
 void movePrev(List L) {
     if (L == NULL ) {
-        fprintf(stdout, "List error: movefront(): NULL list reference\n");
+        fprintf(stdout, "List error: movePrev(): NULL list reference\n");
         exit(EXIT_FAILURE);
     }
     if (L->cursor != NULL) {
@@ -211,6 +211,23 @@ void movePrev(List L) {
             L->index--;
         }
     }
-
-
 }
+
+void moveNext(List L) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: moveNext(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (L->cursor != NULL) {
+        if (L-> cursor == L->back) {
+            L-> cursor = NULL; 
+            L->index = -1; 
+        } else {
+            L->cursor = L->cursor ->next; 
+            L->index++;
+        }
+    }
+}
+
+
