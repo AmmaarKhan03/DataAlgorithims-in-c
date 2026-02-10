@@ -231,3 +231,42 @@ void moveNext(List L) {
 }
 
 
+void preprend (List L, ListElement data) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: prepend(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    Node n = newNode(data); 
+    if (L ->length == 0) {
+        L->front = L->back = n;  
+        L ->length++;
+    } else {
+        n ->next = L->front; 
+        L->front->prev = n; 
+        L->front = n; 
+        
+        if(L->index >= 0) L->index ++;
+    }
+    L->length++;
+}
+
+void append(List L, ListElement data) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: append(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Node n = newNode(data);
+    if (length(L) == 0) {
+        L->back = L->front = n;
+        L->length++; 
+    } else  {
+        n -> prev = L ->back;
+        L->back ->next= n; 
+        L->back = n; 
+        
+        if (L->index >= 0) L->index++;
+    }
+    L -> length++;
+}
+

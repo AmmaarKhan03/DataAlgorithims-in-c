@@ -1,5 +1,3 @@
-
-
 #ifndef _LIST_H_INCLUDE_
 #define _LIST_H_INCLUDE_
 
@@ -34,7 +32,7 @@ void insertBefore(List L, ListElement data);
 void insertAfter(List L, ListElement data);
 void deleteFront(List L);
 void deleteBack(List L);
-void delete(List L);
+void deleteElement(List L);
 
 void printList(FILE* out, List L);
 List copyList(List L);
