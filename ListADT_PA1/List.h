@@ -1,8 +1,17 @@
+
+
 #ifndef _LIST_H_
 #define _LIST_H_
 
+#include <stdio.h>
+#include <stdbool.h>
 
-List newList();
+#define FORMAT "%d"  // format specifier for List 
+
+typedef struct ListObj* List;
+typedef int ListElement; 
+
+List newList(void);
 void freeList(List* pL);
 
 int length(List L);
@@ -26,6 +35,7 @@ void insertAfter(List L, ListElement data);
 void deleteFront(List L);
 void deleteBack(List L);
 void delete(List L);
+
 void printList(FILE* out, List L);
 List copyList(List L);
 List join(List A, List B);
