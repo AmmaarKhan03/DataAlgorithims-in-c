@@ -270,3 +270,32 @@ void append(List L, ListElement data) {
     L -> length++;
 }
 
+void insertBefore(List L, ListElement data) {
+     if (L == NULL ) {
+        fprintf(stdout, "List error: insertbefore(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+     if (L->length == 0) {
+       fprintf(stderr, "List Error: insertBefore(): Empyt List\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->index < 0) {
+        fprintf(stderr, "List Error: insertBefore(): No cursor\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (L->cursor == L->front) {
+        prepend(L, data);
+        return;
+    }
+
+    Node n = newNode(data); 
+    Node c = L->cursor; 
+    n ->prev = c->prev; 
+    c->prev ->next = n;
+    c ->prev = n; 
+
+    L ->length++;
+    L ->index++;
+}
+
