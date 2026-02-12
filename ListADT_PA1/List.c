@@ -299,3 +299,32 @@ void insertBefore(List L, ListElement data) {
     L ->index++;
 }
 
+void insertAfter(List L, ListElement data) {
+    if (L == NULL ) {
+        fprintf(stdout, "List error: insertAfter(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (L->length == 0) {
+       fprintf(stderr, "List Error: insertAfter(): Empyt List\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->index < 0) {
+        fprintf(stderr, "List Error: insertfAter(): No cursor\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (L->cursor == L->back) {
+        append(L, data);
+        return;
+    }
+
+    Node n = newNode(data);
+    Node c = L->cursor; 
+
+    n->next = c->next;
+    n->prev = c;
+    c->next->prev = n;
+    c->next = n;
+}
+
