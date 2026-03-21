@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -385,5 +384,38 @@ void deleteBack(List L) {
 
     L->length--;
     freeNode(&B);
+
+}
+
+void delete(List L) {
+    if (L == NULL) {
+         fprintf(stderr, "List Error: delete(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->length == 0) {
+        fprintf(stderr, "List Error: delete(): Empyt List\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->index < 0) {
+        fprintf(stderr, "List Error: delete(): No cursor\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Node C = L->cursor;
+
+    if (C == L->front) {
+        deleteFront(L);
+    }
+    if(C == L->back) {
+        deleteBack(L);
+    }
+    C->prev->next = C->next;
+    C->next->prev = C ->prev;
+
+    L->cursor = NULL; 
+    L->length--;
+    L->index = -1; 
+
+    freeNode(&C);
 
 }
