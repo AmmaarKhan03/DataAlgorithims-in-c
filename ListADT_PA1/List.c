@@ -328,3 +328,32 @@ void insertAfter(List L, ListElement data) {
     c->next = n;
 }
 
+void deleteFront(List L) {
+    if (L == NULL) {
+        fprintf(stderr, "List Error: deleteFront(); Null reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->length == 0) {
+       fprintf(stderr, "List Error: deleteFront(): Empyt List\n");
+        exit(EXIT_FAILURE);
+    }
+    Node F = L->front;
+
+    if (L->cursor == F) {
+        L->cursor = NULL;
+        L->index = -1; 
+    } else if (L->index >= 0) {
+        L->index--;
+    }
+
+    if (L->length == 1) {
+        L->front = L->back = NULL;
+    } else {
+        L->front = F->next; 
+        L->front->prev = NULL;
+    }
+
+    L->length--;
+    freeNode(&F);
+}
+
