@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -443,7 +442,7 @@ List copyList(List L) {
         exit(EXIT_FAILURE);
     }
 
-    List C = newlist();
+    List C = newList();
     for (Node n = L->front; n != NULL; n = n->next) {
         append(C, n->data);
     }
