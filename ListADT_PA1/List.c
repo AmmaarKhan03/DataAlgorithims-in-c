@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -417,5 +418,86 @@ void delete(List L) {
     L->index = -1; 
 
     freeNode(&C);
+
+}
+
+void printList(FILE *out, List L) {
+    if (L == NULL) {
+        fprintf(stderr, "List Error: printList(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    fprintf(out, "(");
+    for (Node n = L->front; n!= NULL; n = n->next) {
+        fprintf(out, FORMAT, n->data);
+        if (n ->next != NULL) {
+            fprintf(out, ", ");
+        }
+    }
+    fprintf(out, ")");
+
+}
+
+List copyList(List L) {
+    if (L == NULL) {
+        fprintf(stderr, "List Error: copyList(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+
+    List C = newlist();
+    for (Node n = L->front; n != NULL; n = n->next) {
+        append(C, n->data);
+    }
+    return C;
+}
+
+List join(List A, List B) {
+    if (A == NULL || B == NULL) {
+        fprintf(stderr, "List Error: join(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    List J = newList();
+    for (Node n = A->front; n != NULL; n = n->next) {
+        append(J, n->data);
+    }
+    for (Node n = B->front; n != NULL; n = n->next) {
+        append(J, n->data);
+    }
+    return J;
+}
+
+
+List split(List L) {
+    if (L == NULL) {
+        fprintf(stderr, "List Error: split(): NULL list reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->length == 0) {
+      fprintf(stderr, "List Error: split(): Empyt List\n");
+        exit(EXIT_FAILURE);
+    }
+    if (L->index < 0) {
+         fprintf(stderr, "List Error: split(): No cursor\n");
+        exit(EXIT_FAILURE);
+    }
+
+    List R = newList();
+
+    if (L->cursor == L->front) {
+        return R;
+    }
+
+    Node splits = L->cursor->prev;
+    R->front = L->front;
+    R->back = L->cursor -> prev;
+    R->length = L->index;
+    R->cursor = NULL;
+    splits -> next = NULL; 
+    L->front = L->cursor;
+    L->cursor = NULL;
+
+    L->length = L->length - R->length;
+    L->index = 0;
+
+    return R;
 
 }
