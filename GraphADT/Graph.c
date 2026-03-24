@@ -52,3 +52,20 @@ Graph newGraph(int n) {
     return G;
 
 }
+
+void freeGraph(Graph* pG) {
+    if (pG != NULL && pG != NULL)  {
+        Graph G = *pG;
+
+        for (int i = 1; i <= (*pG)->order; i++) {
+            freeList(&(G->adj[i]));
+        }
+        free(G->adj);
+        free(G->color);
+        free(G->dist);
+        free(G->parent);
+
+        free(G);
+        *pG = NULL;
+    }
+}
