@@ -133,4 +133,31 @@ int getDist(Graph G, int u) {
     return G-> dist[u];
 }
 
+void getPath(List L, Graph G, int u) {
+        if (L == NULL) {
+        fprintf(stderr, "Graph Error: getPath(): NULL List reference\n");
+        exit(EXIT_FAILURE);
+    }
+     if (G == NULL) {
+        fprintf(stderr, "Graph Error: getPath(): NULL Graph reference\n");
+        exit(EXIT_FAILURE);
+    }
+    if ( 1 > u || u > G->order) {
+        fprintf(stderr, "Graph error: getPath(): vertex %d out of range 1.. %d", u, G->order);
+        exit(EXIT_FAILURE);
+    }
+    if ( G->source == NIL) { 
+         fprintf(stderr, "Graph Error: getPath(): BFS not run (source is NIL)\n");
+         exit(EXIT_FAILURE);
+    }
 
+    if (G-> source == u) {
+        append(L, u);
+    } else if (G->parent[u] == NIL ) {
+        append(L, NIL);
+    } else {
+        getPath(L, G, G->parent[u]);
+        append(L, u);
+    }
+
+}
