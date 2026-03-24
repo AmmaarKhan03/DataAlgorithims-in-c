@@ -87,3 +87,35 @@ int getNumEdges(Graph G){
 
     return G-> numEdges;
 }
+
+int getNumArcs (Graph G){
+     if ( G == NULL) {
+        fprintf(stderr, "Graph error: getNumArcs(): NULL Graph refernce");
+        exit(EXIT_FAILURE);
+    }
+
+    return G-> numArcs;
+}
+
+int getSource (Graph G){
+     if ( G == NULL) {
+        fprintf(stderr, "Graph error: getSource(): NULL Graph refernce");
+        exit(EXIT_FAILURE);
+    }
+
+    return G-> source;
+}
+
+int getParent (Graph G, int u) {
+     if ( G == NULL) {
+        fprintf(stderr, "Graph error: getParent(): NULL Graph refernce");
+        exit(EXIT_FAILURE);
+    }
+    if (1 > u || u > G->order) {
+        fprintf(stderr, "Graph error: getParent(): vertex %d out of range 1.. %d", u, G->order);
+        exit(EXIT_FAILURE);
+    }
+
+    return G -> parent[u];
+}
+
