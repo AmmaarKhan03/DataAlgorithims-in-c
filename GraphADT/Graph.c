@@ -69,3 +69,21 @@ void freeGraph(Graph* pG) {
         *pG = NULL;
     }
 }
+
+int getOrder(Graph G) {
+     if ( G == NULL) {
+        fprintf(stderr, "Graph error: getOrder(): NULL Graph refernce");
+        exit(EXIT_FAILURE);
+    }
+    return G -> order;
+
+}
+
+int getNumEdges(Graph G){
+    if ( G == NULL) {
+        fprintf(stderr, "Graph error: getNumEdges(): NULL Graph refernce");
+        exit(EXIT_FAILURE);
+    }
+
+    return G-> numEdges;
+}
