@@ -119,3 +119,18 @@ int getParent (Graph G, int u) {
     return G -> parent[u];
 }
 
+int getDist(Graph G, int u) {
+    if ( G == NULL) {
+        fprintf(stderr, "Graph error: getDist(): NULL Graph refernce");
+        exit(EXIT_FAILURE);
+    }
+    if (1 > u || u > G->order) {
+        fprintf(stderr, "Graph error: getDist(): vertex %d out of range 1.. %d", u, G->order);
+        exit(EXIT_FAILURE);
+    }
+
+
+    return G-> dist[u];
+}
+
+
